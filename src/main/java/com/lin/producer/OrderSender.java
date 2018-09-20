@@ -18,7 +18,22 @@ public class OrderSender {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+
+    // 回调函数：confirm确认
+    final RabbitTemplate.ConfirmCallback confirmCallback =  new RabbitTemplate.ConfirmCallback() {
+        @Override
+        public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+            if (ack) {
+                System.out.println("确认成功");
+            } else {
+                System.out.println("确认出现异常，" + cause);
+            }
+        }
+    };
+
     public void send(Order order) throws Exception {
+        // 设置确认回调方法
+        rabbitTemplate.setConfirmCallback(confirmCallback);
 
         // 消息唯一标识对象
         CorrelationData correlationData = new CorrelationData();
