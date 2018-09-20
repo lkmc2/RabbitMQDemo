@@ -18,7 +18,7 @@ public class OrderSender {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void sendOrder(Order order) throws Exception {
+    public void send(Order order) throws Exception {
 
         // 消息唯一标识对象
         CorrelationData correlationData = new CorrelationData();
