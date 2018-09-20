@@ -23,14 +23,21 @@ public class OrderSender {
     final RabbitTemplate.ConfirmCallback confirmCallback =  new RabbitTemplate.ConfirmCallback() {
         @Override
         public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+            String messageId = correlationData.getId();
+
             if (ack) {
-                System.out.println("确认成功");
+                System.out.println("确认成功，messageId = " + messageId);
+                // 编写代码将消息写入数据库日志表
             } else {
                 System.out.println("确认出现异常，" + cause);
             }
         }
     };
 
+    /**
+     * 发送订单消息给RabbitMQ服务器
+     * @param order 订单
+     */
     public void send(Order order) throws Exception {
         // 设置确认回调方法
         rabbitTemplate.setConfirmCallback(confirmCallback);
