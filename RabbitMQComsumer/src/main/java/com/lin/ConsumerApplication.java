@@ -1,12 +1,12 @@
-package com.spring;
+package com.lin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ComsumerApplication {
+public class ConsumerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ComsumerApplication.class, args);
+        SpringApplication.run(ConsumerApplication.class, args);
     }
 }

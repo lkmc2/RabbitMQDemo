@@ -18,6 +18,7 @@ public class RabbitMQApplicationTests {
     @Autowired
     private OrderSender orderSender;
 
+    // 创建订单，发送给RabbitMQ消息队列
     @Test
     public void testSend1() throws Exception {
         Order order = new Order();
